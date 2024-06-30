@@ -1,16 +1,23 @@
 import Echo from '../components/Echo';
 import AddEchoModal from '../components/AddEchoModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { pushEcho, pullEchos } from '../db';
+import { v4 as uuidv4 } from 'uuid';
 
-function Bulletin() {
-  const [echoData, setEchoData] = useState([
-    { x: 0.1, y: 50, message: 'Echo 1' },
-    { x: 0.2, y: 100, message: 'Echo 2' },
-    { x: 0.5, y: 150, message: 'Echo 3' },
-    { x: 0.3, y: 1050, message: 'Bony' },
-  ])
+function Bulletin({db}) {
+  const [echoData, setEchoData] = useState([])
 
   const [showAddModal, setShowAddModal] = useState({ show: false, x: 0, y: 0 });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const echoes = await pullEchos(db);
+      setEchoData(echoes);
+      console.log(echoes);
+    };
+    fetchData();
+    console.log(echoData);
+  }, [])
 
   const handleBackgroundClick = (e) => {
     const x = e.clientX / window.innerWidth; 
@@ -18,9 +25,10 @@ function Bulletin() {
     setShowAddModal({ show: true, x, y });
   };
 
-  const handleAddEcho = (message) => {
+  const handleAddEcho = async (message) => {
     setEchoData([...echoData, { x: showAddModal.x, y: showAddModal.y, message }]);
     setShowAddModal({ show: false, x: 0, y: 0 });
+    await pushEcho(db, uuidv4(), showAddModal.x, showAddModal.y, message);
   };
 
   const handleAddEchoClose = (e) => {
