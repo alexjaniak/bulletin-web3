@@ -3,13 +3,13 @@ import {
     Routes,
     Route,
   } from 'react-router-dom';
-  import Main from './pages/Main';
+  import Bulletin from './pages/Bulletin';
   
   function AppRouter() {
     return (
       <Router>
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Bulletin />} />
         </Routes>
       </Router>
     );
