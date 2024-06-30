@@ -11,9 +11,12 @@ function AddEchoModal({ onClose, onAddEcho }) {
         }
     };
 
-    const handleClick = (e) => {
+    const handleClose = (e) => {
         e.stopPropagation();
-    };
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    }
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onClick={onClose}>
