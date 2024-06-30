@@ -18,9 +18,9 @@
 }
 
 /* uncomment to hide scrollbar */
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
-} */
+}
 
 body, html {
   overscroll-behavior: none;
