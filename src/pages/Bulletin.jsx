@@ -6,9 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 function Bulletin({ db }) {
   const [echoData, setEchoData] = useState([])
-
   const [showAddModal, setShowAddModal] = useState({ show: false, x: 0, y: 0 });
-
   const [scrollY, setScrollY] = useState(window.scrollY);
 
   useEffect(() => {
@@ -32,6 +30,20 @@ function Bulletin({ db }) {
     fetchData();
     console.log(echoData);
   }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollX !== 0) {
+        window.scrollTo(0, window.scrollY);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleBackgroundClick = (e) => {
     const x = e.clientX / window.innerWidth;
