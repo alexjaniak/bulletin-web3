@@ -9,6 +9,20 @@ function Bulletin({ db }) {
 
   const [showAddModal, setShowAddModal] = useState({ show: false, x: 0, y: 0 });
 
+  const [scrollY, setScrollY] = useState(window.scrollY);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       const echoes = await pullEchos(db);
@@ -35,10 +49,15 @@ function Bulletin({ db }) {
     setShowAddModal(false);
 
   }
+  //window.scrollTo(0, Math.floor(Math.random() * 10000))
 
   return (
     <div className="relative h-screen" onClick={handleBackgroundClick}>
       <div className="h-bulletin-height relative">
+        <div className="fixed top-0 left-0 p-2 text-black bg-white z-50 w-[100px]">
+          @ y: {scrollY}
+        </div>
+
         {echoData.map((button, index) => (
           <Echo key={index} x={button.x} y={button.y} message={button.message} />
         ))}
