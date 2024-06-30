@@ -23,7 +23,7 @@ const db = getFirestore(app);
 function App() {
   return (
     <div>
-      <AppRouter />
+      <AppRouter db={db}/>
     </div>
   );
 }
