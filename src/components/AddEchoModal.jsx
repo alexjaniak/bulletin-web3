@@ -11,13 +11,16 @@ function AddEchoModal({ onClose, onAddEcho }) {
         }
     };
 
-    const handleClick = (e) => {
+    const handleClose = (e) => {
         e.stopPropagation();
-    };
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    }
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20 z-50" onClick={onClose}>
-            <div className="bg-white rounded shadow-lg w-1/2 max-w-4xl h-1/4 flex flex-col justify-center items-center" onClick={handleClick}>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20 z-50" onClick={handleClose}>
+            <div className="bg-white rounded shadow-lg w-1/2 max-w-4xl h-1/4 flex flex-col justify-center items-center">
                 <textarea
                     placeholder="Echo something to the internet..."
                     value={message}

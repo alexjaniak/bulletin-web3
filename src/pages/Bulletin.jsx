@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { pushEcho, pullEchos } from '../db';
 import { v4 as uuidv4 } from 'uuid';
 
-function Bulletin({db}) {
+function Bulletin({ db }) {
   const [echoData, setEchoData] = useState([])
 
   const [showAddModal, setShowAddModal] = useState({ show: false, x: 0, y: 0 });
@@ -20,7 +20,7 @@ function Bulletin({db}) {
   }, [])
 
   const handleBackgroundClick = (e) => {
-    const x = e.clientX / window.innerWidth; 
+    const x = e.clientX / window.innerWidth;
     const y = e.clientY + window.scrollY;
     setShowAddModal({ show: true, x, y });
   };
@@ -31,11 +31,9 @@ function Bulletin({db}) {
     await pushEcho(db, uuidv4(), showAddModal.x, showAddModal.y, message);
   };
 
-  const handleAddEchoClose = (e) => {
-      e.stopPropagation();
-      if (e.target === e.currentTarget) {
-          setShowAddModal(false);
-      }
+  const handleAddEchoClose = () => {
+    setShowAddModal(false);
+
   }
 
   return (
