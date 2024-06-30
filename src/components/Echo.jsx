@@ -31,15 +31,19 @@ function Echo({ x, y, message }) {
                 style={{ left, top: `${y}px` }}
                 onClick={handleClick}
             >
-                <div className="bg-white rounded-full w-2 h-2 transform transition-transform duration-300 ease-in-out group-hover:scale-150"></div>
+                <div className="bg-white w-2 h-2 transform transition-transform duration-300 ease-in-out group-hover:scale-150"></div>
             </button>
             {showMessage && (
                 <div
                     className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
                     onClick={handleClose}
                 >
-                    <div className="text-black bg-white p-8 border border-gray-300 rounded shadow-lg w-1/4 h-1/4 flex flex-col justify-center items-center">
-                        <p>{message}</p>
+                    <div className="text-black bg-white p-4 w-1/4 h-1/4">
+                        <p className='text-center p-2'>@ x: {x.toFixed(2)} y: {y}</p>
+                        <hr className></hr>
+                        <div className='p-2 flex flex-col'>
+                            <p>{message}</p>
+                        </div>
                     </div>
                 </div>
             )}
