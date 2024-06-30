@@ -3,7 +3,6 @@ import AppRouter from './AppRouter';
 // Init firesbase/store
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore"; 
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -20,11 +19,6 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
-const querySnapshot = await getDocs(collection(db, "messages"));
-querySnapshot.forEach((doc) => {
-  console.log(`${doc.id} => ${doc.data()}`);
-  console.log(doc.data().message);
-});
 
 function App() {
   return (
