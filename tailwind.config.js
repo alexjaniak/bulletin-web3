@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        'bulletin-height': '10000px',
+      },
+    },
   },
   plugins: [],
 }
