@@ -23,6 +23,13 @@ function Bulletin() {
     setShowAddModal({ show: false, x: 0, y: 0 });
   };
 
+  const handleAddEchoClose = (e) => {
+      e.stopPropagation();
+      if (e.target === e.currentTarget) {
+          setShowAddModal(false);
+      }
+  }
+
   return (
     <div className="relative h-screen" onClick={handleBackgroundClick}>
       <div className="h-bulletin-height relative">
@@ -30,9 +37,9 @@ function Bulletin() {
           <Echo key={index} x={button.x} y={button.y} message={button.message} />
         ))}
       </div>
-      {showAddModal && (
+      {showAddModal.show && (
         <AddEchoModal
-          onClose={() => setShowAddModal(false)}
+          onClose={handleAddEchoClose}
           onAddEcho={handleAddEcho}
         />
       )}
