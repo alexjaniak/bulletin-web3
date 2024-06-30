@@ -19,8 +19,8 @@ function AddEchoModal({ onClose, onAddEcho }) {
     }
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onClick={onClose}>
-            <div className="bg-white shadow-lg w-1/2 max-w-4xl h-1/4 flex flex-col justify-center items-center" onClick={handleClick}>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onClick={handleClose}>
+            <div className="bg-white shadow-lg w-1/2 max-w-4xl h-1/4 flex flex-col justify-center items-center">
                 <textarea
                     placeholder="Echo something to the internet..."
                     value={message}
