@@ -35,7 +35,6 @@ function Bulletin({ db }) {
     setShowAddModal(false);
 
   }
-  window.scrollTo(0, Math.floor(Math.random() * 10000))
 
   return (
     <div className="relative h-screen" onClick={handleBackgroundClick}>
