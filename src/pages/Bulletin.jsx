@@ -1,8 +1,8 @@
 
-function Main() {
+function Bulletin() {
   return (
     <div>
-        <h1>Main Page</h1>
+        <h1>Bulletin Page</h1>
       <div className= "h-bulletin-height">
         {/* This div creates the long scrolling area */}
       </div>
@@ -11,4 +11,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Bulletin;
