@@ -22,13 +22,14 @@ function Echo({ x, y, message }) {
         }
     };
 
-    const left = `${x * 100}vw`;
+    const left = `calc(${x * 100}vw - 12px)`;
+    const top = `calc(${y}px - 12px)`;
 
     return (
         <div className="relative">
             <button
                 className="absolute w-6 h-6 rounded-full bg-transparent border-none p-0 flex justify-center items-center group"
-                style={{ left, top: `${y}px` }}
+                style={{ left, top }}
                 onClick={handleClick}
             >
                 <div className="bg-white w-2 h-2 transform transition-transform duration-300 ease-in-out group-hover:scale-150"></div>
