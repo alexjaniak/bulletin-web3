@@ -10,19 +10,18 @@ function Bulletin() {
     { x: 0.3, y: 1050, message: 'Bony' },
   ])
 
-  const [showAddModal, setShowAddModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState({ show: false, x: 0, y: 0 });
 
-  const handleBackgroundClick = () => {
-    console.log('Background clicked');
-    setShowAddModal(true);
+  const handleBackgroundClick = (e) => {
+    const x = e.clientX / window.innerWidth; 
+    const y = e.clientY + window.scrollY;
+    setShowAddModal({ show: true, x, y });
   };
 
   const handleAddEcho = (message) => {
-    const newX = 0.5
-    const newY = 300
-    setEchoData([...echoData, { x: newX, y: newY, message }]);
+    setEchoData([...echoData, { x: showAddModal.x, y: showAddModal.y, message }]);
+    setShowAddModal({ show: false, x: 0, y: 0 });
   };
-
 
   return (
     <div className="relative h-screen" onClick={handleBackgroundClick}>
