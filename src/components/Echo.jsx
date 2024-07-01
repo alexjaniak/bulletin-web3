@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 Echo.propTypes = {
     x: PropTypes.number.isRequired,
@@ -10,6 +10,18 @@ Echo.propTypes = {
 function Echo({ x, y, message }) {
     const [showMessage, setShowMessage] = useState(false);
 
+    useEffect(() => {
+        if (showMessage) {
+            window.addEventListener('keydown', handleKeyDown);
+        } else {
+            window.removeEventListener('keydown', handleKeyDown);
+        }
+    
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [showMessage]);
+
     const handleClick = (e) => {
         e.stopPropagation();
         setShowMessage(!showMessage);
@@ -18,6 +30,12 @@ function Echo({ x, y, message }) {
     const handleClose = (e) => {
         e.stopPropagation();
         if (e.target === e.currentTarget) {
+            setShowMessage(false);
+        }
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Escape') {
             setShowMessage(false);
         }
     };
