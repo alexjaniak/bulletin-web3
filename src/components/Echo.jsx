@@ -66,7 +66,7 @@ function Echo({ x, y, message }) {
                     <div className="text-black bg-white p-2 w-1/2 max-w-4xl max-h-[40%] overflow-auto">
                         <p className='text-center p-2'>@ x: {x.toFixed(2)} y: {y}</p>
                         <hr className="mx-2"></hr>
-                        <div className='p-2 flex flex-col break-words break'>
+                        <div className='p-2 flex flex-col break-words break whitespace-pre-wrap'>
                             <p>{message}</p>
                         </div>
                     </div>

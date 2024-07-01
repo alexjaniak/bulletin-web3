@@ -7,7 +7,6 @@ export async function pushEcho(db, id, x, y, message) {
       y: y,
       message: message
     });
-    console.log("Echo left with ID: ", id);
   }
   
 export async function pullEchos(db) {

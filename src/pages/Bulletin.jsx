@@ -53,7 +53,6 @@ function Bulletin({ db }) {
   const handleBackgroundClick = (e) => {
     const x = e.clientX / window.innerWidth;
     const y = e.clientY + window.scrollY;
-    console.log(window.scrollY);
     setShowAddModal({ show: true, x, y });
   };
 

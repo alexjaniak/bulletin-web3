@@ -18,7 +18,7 @@ function AddEchoModal({ onClose, onAddEcho, message, setMessage }) {
             return;
         }
         if (message.trim()) {
-            onAddEcho(message);
+            onAddEcho(message.trim());
             setMessage('');
             onClose();
         }
