@@ -63,10 +63,10 @@ function Echo({ x, y, message }) {
                     className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
                     onClick={handleClose}
                 >
-                    <div className="text-black bg-white p-4 w-1/4 h-1/4">
+                    <div className="text-black bg-white p-2 w-1/2 max-w-4xl max-h-[40%] overflow-auto">
                         <p className='text-center p-2'>@ x: {x.toFixed(2)} y: {y}</p>
-                        <hr className></hr>
-                        <div className='p-2 flex flex-col'>
+                        <hr className="mx-2"></hr>
+                        <div className='p-2 flex flex-col break-words break'>
                             <p>{message}</p>
                         </div>
                     </div>

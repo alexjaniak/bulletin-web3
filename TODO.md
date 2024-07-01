@@ -3,13 +3,9 @@
 ## Design
 
 - view post redesign
+- expandable echo view
 - animate in create and view
 - slow down scrolling?
-- expandable echo view
-
-## Search
-
-- font
 
 ## Tech Stack
 

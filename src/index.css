@@ -15,16 +15,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* uncomment to hide scrollbar */
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
   display: none;
 }
 
 body, html {
   overscroll-behavior: none;
   max-width: 100%;
-}
-
-.hover-hidden:hover {
-  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
