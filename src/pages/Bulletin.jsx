@@ -10,6 +10,20 @@ function Bulletin({ db }) {
   const [scrollY, setScrollY] = useState(window.scrollY);
   const [message, setMessage] = useState('');
 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const echoes = await pullEchos(db);
+      setEchoData(echoes);
+    };
+    fetchData();
+  }, [db])
+
+  useEffect(() => {
+    window.scrollTo(0, Math.floor(Math.random() * 10000))
+  }, [])
+
+
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -21,15 +35,6 @@ function Bulletin({ db }) {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const echoes = await pullEchos(db);
-      setEchoData(echoes);
-      console.log(echoes);
-    };
-    fetchData();
-  }, [db])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,7 +67,6 @@ function Bulletin({ db }) {
     setShowAddModal(false);
 
   }
-  //window.scrollTo(0, Math.floor(Math.random() * 10000))
 
   return (
     <div className="relative h-screen" onClick={handleBackgroundClick}>

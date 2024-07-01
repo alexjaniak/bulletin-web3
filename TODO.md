@@ -2,8 +2,6 @@
 
 ## Coding
 
-- hover over top left to make fade out
-- top left y based on mouse
 - random vertical spawn
 
 ## Design
