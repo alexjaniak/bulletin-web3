@@ -2,13 +2,8 @@
 
 ## Coding
 
-- keyboard shortcuts
-  - escape creation, reading
-  - enter to post
-- start add post focused in textbox
 - hover over top left to make fade out
 - character count cap in echo creation
-- echo tab disable
 - top left y based on mouse
 - random vertical spawn
 

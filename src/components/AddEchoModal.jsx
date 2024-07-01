@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 function AddEchoModal({ onClose, onAddEcho }) {
     const [message, setMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const textareaRef = useRef(null);
 
     useEffect(() => {
@@ -12,6 +13,10 @@ function AddEchoModal({ onClose, onAddEcho }) {
     }, []);
 
     const handlePost = () => {
+        if (message.trim().length > 1000) {
+            setErrorMessage('Message is too long :(');
+            return;
+        }
         if (message.trim()) {
             onAddEcho(message);
             onClose();
@@ -46,6 +51,7 @@ function AddEchoModal({ onClose, onAddEcho }) {
                     onKeyDown={handleKeyDown}
                     className="p-2 w-full h-full bg-white text-black outline-none resize-none" // Add hover:bg-gray-200 class
                 />
+                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                 <button
                     onClick={handlePost}
                     className="bg-[#333] text-white px-4 py-2 w-full hover:bg-[#444] text-xl"
