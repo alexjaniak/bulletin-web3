@@ -29,6 +29,9 @@ function AddEchoModal({ onClose, onAddEcho }) {
         if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
             e.preventDefault();
             handlePost();
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            onClose();
         }
     };
 
