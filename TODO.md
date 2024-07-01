@@ -1,9 +1,5 @@
 # TODO
 
-## Coding
-
-- random vertical spawn
-
 ## Design
 
 - view post redesign
