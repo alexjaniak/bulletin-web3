@@ -10,7 +10,6 @@
 ## Search
 
 - font
-- favicon
 
 ## Tech Stack
 
