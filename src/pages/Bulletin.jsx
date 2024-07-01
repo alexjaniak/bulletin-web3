@@ -29,8 +29,7 @@ function Bulletin({ db }) {
       console.log(echoes);
     };
     fetchData();
-    console.log(echoData);
-  }, [])
+  }, [db])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,8 +67,8 @@ function Bulletin({ db }) {
   return (
     <div className="relative h-screen" onClick={handleBackgroundClick}>
       <div className="h-bulletin-height relative">
-        <div className="fixed top-0 left-0 p-2 text-black bg-white z-50 w-[100px]">
-          @ y: {scrollY}
+        <div className={`fixed top-0 left-0 text-xl text-black px-1 bg-white z-50 text-center cursor-default ${scrollY === 0 ? 'hidden' : ''}`} onClick={(e) => e.stopPropagation()}>
+          {scrollY}
         </div>
 
         {echoData.map((button, index) => (
@@ -81,7 +80,7 @@ function Bulletin({ db }) {
           onClose={handleAddEchoClose}
           onAddEcho={handleAddEcho}
           message={message}
-          setMessage={setMessage} 
+          setMessage={setMessage}
         />
       )}
     </div>

@@ -3,7 +3,6 @@
 ## Coding
 
 - hover over top left to make fade out
-- character count cap in echo creation
 - top left y based on mouse
 - random vertical spawn
 
