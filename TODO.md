@@ -1,22 +1,36 @@
 # TODO
 
-- font
-- domain
-- hosting
-- favicon
+## Coding
+
 - keyboard shortcuts
   - escape creation, reading
   - enter to post
 - start add post focused in textbox
-- view post redesign
 - hover over top left to make fade out
-- animate in create and view
-- slow down scrolling?
-- google analytics
 - character count cap in echo creation
-- real time database
 - echo tab disable
 - top left y based on mouse
-- expandable echo view
-- playtest/make website more clear
 - random vertical spawn
+
+## Design
+
+- view post redesign
+- animate in create and view
+- slow down scrolling?
+- expandable echo view
+
+## Search
+
+- font
+- favicon
+
+## Tech Stack
+
+- domain
+- hosting
+- google analytics
+- real time database
+
+## Other
+
+- playtest/make website more clear
