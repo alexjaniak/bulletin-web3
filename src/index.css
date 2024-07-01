@@ -25,3 +25,7 @@ body, html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+body.no-scroll {
+  overflow: hidden;
+}

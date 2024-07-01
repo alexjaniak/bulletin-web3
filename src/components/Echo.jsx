@@ -12,16 +12,29 @@ function Echo({ x, y, message }) {
     const buttonRef = useRef(null);
 
     useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                setShowMessage(false);
+                if (buttonRef.current) {
+                    buttonRef.current.blur();
+                }
+            }
+        };
+
         if (showMessage) {
             window.addEventListener('keydown', handleKeyDown);
+            document.body.classList.add('no-scroll');
         } else {
             window.removeEventListener('keydown', handleKeyDown);
+            document.body.classList.remove('no-scroll');
         }
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
+            document.body.classList.remove('no-scroll');
         };
     }, [showMessage]);
+    
 
     const handleClick = (e) => {
         e.stopPropagation();
@@ -32,15 +45,6 @@ function Echo({ x, y, message }) {
         e.stopPropagation();
         if (e.target === e.currentTarget) {
             setShowMessage(false);
-        }
-    };
-
-    const handleKeyDown = (e) => {
-        if (e.key === 'Escape') {
-            setShowMessage(false);
-            if (buttonRef.current) {
-                buttonRef.current.blur();
-            }
         }
     };
 

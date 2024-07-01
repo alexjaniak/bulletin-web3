@@ -10,6 +10,11 @@ function AddEchoModal({ onClose, onAddEcho, message, setMessage }) {
             textareaRef.current.focus();
             textareaRef.current.setSelectionRange(textareaRef.current.value.length, textareaRef.current.value.length);
         }
+        document.body.classList.add('no-scroll'); 
+    
+        return () => {
+            document.body.classList.remove('no-scroll'); 
+        };
     }, []);
 
     const handlePost = () => {
