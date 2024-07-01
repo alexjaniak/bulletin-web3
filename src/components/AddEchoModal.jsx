@@ -7,9 +7,9 @@ function AddEchoModal({ onClose, onAddEcho }) {
 
     useEffect(() => {
         if (textareaRef.current) {
-          textareaRef.current.focus();
+            textareaRef.current.focus();
         }
-      }, []);
+    }, []);
 
     const handlePost = () => {
         if (message.trim()) {
@@ -25,6 +25,13 @@ function AddEchoModal({ onClose, onAddEcho }) {
         }
     }
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
+            e.preventDefault();
+            handlePost();
+        }
+    };
+
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onClick={handleClose}>
             <div className="bg-white shadow-lg w-1/2 max-w-4xl h-1/4 flex flex-col justify-center items-center">
@@ -33,6 +40,7 @@ function AddEchoModal({ onClose, onAddEcho }) {
                     placeholder="Echo something to the internet..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     className="p-2 w-full h-full bg-white text-black outline-none resize-none" // Add hover:bg-gray-200 class
                 />
                 <button
@@ -40,7 +48,7 @@ function AddEchoModal({ onClose, onAddEcho }) {
                     className="bg-[#333] text-white px-4 py-2 w-full hover:bg-[#444] text-xl"
                 >
                     Post
-                </button> 
+                </button>
             </div>
         </div>
     );
