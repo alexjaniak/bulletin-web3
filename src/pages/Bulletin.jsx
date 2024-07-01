@@ -8,6 +8,7 @@ function Bulletin({ db }) {
   const [echoData, setEchoData] = useState([])
   const [showAddModal, setShowAddModal] = useState({ show: false, x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(window.scrollY);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,6 +80,8 @@ function Bulletin({ db }) {
         <AddEchoModal
           onClose={handleAddEchoClose}
           onAddEcho={handleAddEcho}
+          message={message}
+          setMessage={setMessage} 
         />
       )}
     </div>

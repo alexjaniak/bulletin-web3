@@ -1,14 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-function AddEchoModal({ onClose, onAddEcho }) {
-    const [message, setMessage] = useState('');
+function AddEchoModal({ onClose, onAddEcho, message, setMessage }) {
     const [errorMessage, setErrorMessage] = useState('');
     const textareaRef = useRef(null);
 
     useEffect(() => {
         if (textareaRef.current) {
             textareaRef.current.focus();
+            textareaRef.current.setSelectionRange(textareaRef.current.value.length, textareaRef.current.value.length);
         }
     }, []);
 
@@ -19,6 +19,7 @@ function AddEchoModal({ onClose, onAddEcho }) {
         }
         if (message.trim()) {
             onAddEcho(message);
+            setMessage('');
             onClose();
         }
     };
@@ -66,6 +67,8 @@ function AddEchoModal({ onClose, onAddEcho }) {
 AddEchoModal.propTypes = {
     onClose: PropTypes.func.isRequired,
     onAddEcho: PropTypes.func.isRequired,
+    message: PropTypes.string.isRequired,
+    setMessage: PropTypes.func.isRequired,
 };
 
 export default AddEchoModal;
