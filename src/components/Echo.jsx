@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 Echo.propTypes = {
     x: PropTypes.number.isRequired,
@@ -9,6 +9,7 @@ Echo.propTypes = {
 
 function Echo({ x, y, message }) {
     const [showMessage, setShowMessage] = useState(false);
+    const buttonRef = useRef(null);
 
     useEffect(() => {
         if (showMessage) {
@@ -16,7 +17,7 @@ function Echo({ x, y, message }) {
         } else {
             window.removeEventListener('keydown', handleKeyDown);
         }
-    
+
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
@@ -37,6 +38,9 @@ function Echo({ x, y, message }) {
     const handleKeyDown = (e) => {
         if (e.key === 'Escape') {
             setShowMessage(false);
+            if (buttonRef.current) {
+                buttonRef.current.blur();
+            }
         }
     };
 
@@ -46,6 +50,8 @@ function Echo({ x, y, message }) {
     return (
         <div className="relative">
             <button
+                ref={buttonRef}
+                tabIndex={-1}
                 className="absolute w-6 h-6 rounded-full bg-transparent border-none p-0 flex justify-center items-center group"
                 style={{ left, top }}
                 onClick={handleClick}
