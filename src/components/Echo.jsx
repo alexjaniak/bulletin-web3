@@ -7,7 +7,7 @@ Echo.propTypes = {
     message: PropTypes.string.isRequired,
 }
 
-function Echo({ x, y, message }) {
+function Echo({ x, y, message, important }) {
     const [showMessage, setShowMessage] = useState(false);
     const buttonRef = useRef(null);
 
@@ -50,7 +50,6 @@ function Echo({ x, y, message }) {
 
     const left = `calc(${x * 100}vw - 12px)`;
     const top = `calc(${y}px - 12px)`;
-
     return (
         <div className="relative">
             <button
@@ -60,7 +59,7 @@ function Echo({ x, y, message }) {
                 style={{ left, top }}
                 onClick={handleClick}
             >
-                <div className="bg-white w-2 h-2 transform transition-transform duration-300 ease-in-out group-hover:scale-150"></div>
+                {(important === "yes")? <div className="z-49 bg-green-500 w-2 h-2 transform transition-transform duration-300 ease-in-out group-hover:scale-150"></div> : <div className="bg-white w-2 h-2 transform transition-transform duration-300 ease-in-out group-hover:scale-150"></div>}
             </button>
             {showMessage && (
                 <div

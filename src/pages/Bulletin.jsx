@@ -81,7 +81,7 @@ function Bulletin({ db }) {
         </div>
 
         {echoData.map((button, index) => (
-          <Echo key={index} x={button.x} y={button.y} message={button.message} />
+          <Echo key={index} x={button.x} y={button.y} message={button.message} important={button.important}/>
         ))}
       </div>
       {showAddModal.show && (
