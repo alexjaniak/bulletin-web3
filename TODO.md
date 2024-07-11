@@ -7,10 +7,7 @@
 
 ## Tech Stack
 
-- domain
-- hosting
 - google analytics
-- real time database
 
 ## Other
 
