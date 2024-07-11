@@ -1,8 +1,9 @@
 import Echo from '../components/Echo';
 import AddEchoModal from '../components/AddEchoModal';
 import { useEffect, useState } from 'react';
-import { pushEcho, pullEchos } from '../db';
+import { pushEcho } from '../db';
 import { v4 as uuidv4 } from 'uuid';
+import { collection, onSnapshot } from 'firebase/firestore';
 
 function Bulletin({ db }) {
   const [echoData, setEchoData] = useState([])
@@ -13,11 +14,16 @@ function Bulletin({ db }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const echoes = await pullEchos(db);
-      setEchoData(echoes);
-    };
+      const unsub = onSnapshot(collection(db, "echoes"), (querySnapshot) => {
+        let echoes = [];
+        querySnapshot.forEach((doc) => {
+          echoes.push(doc.data());
+        });
+        setEchoData(echoes);
+      });
+    }
     fetchData();
-  }, [db])
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, Math.floor(Math.random() * 10000))

@@ -1,4 +1,4 @@
-import { collection, getDocs, doc, setDoc } from "firebase/firestore"; 
+import { collection, getDocs, doc, setDoc, onSnapshot } from "firebase/firestore"; 
 
 export async function pushEcho(db, id, x, y, message) {
     // Add a new echo with id to echoes
@@ -9,11 +9,12 @@ export async function pushEcho(db, id, x, y, message) {
     });
   }
   
-export async function pullEchos(db) {
-  const querySnapshot = await getDocs(collection(db, "echoes"));
-  let echoes = [];
-  querySnapshot.forEach((doc) => {
-    echoes.push(doc.data());
-  });
-  return echoes;
-}
+//export async function pullEchos(db) {
+//  const unsub = onSnapshot(collection(db, "echoes"), (querySnapshot) => {
+//    let echoes = [];
+//    querySnapshot.forEach((doc) => {
+//      echoes.push(doc.data());
+//    });
+//  }
+//  return echoes;
+//}
