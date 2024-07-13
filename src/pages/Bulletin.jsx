@@ -74,7 +74,7 @@ function Bulletin({ db }) {
   }
 
   return (
-    <div className="relative h-screen disable-scroll" onClick={handleBackgroundClick}>
+    <div className="relative h-screen disable-scroll cursor-pointer" onClick={handleBackgroundClick}>
       <div className="h-bulletin-height relative disable-scroll">
         <div className={`fixed top-0 left-0 text-xl text-black px-1 bg-white z-50 text-center cursor-default ${scrollY === 0 ? 'hidden' : ''}`} onClick={(e) => e.stopPropagation()}>
           {scrollY}
