@@ -6,14 +6,16 @@ This project implements a decentralized message system called Echo, where users 
 - Test suite demonstrating core functionality
 - TypeScript configuration for development
 
-## Testing On Arbitrum Fork
+## Testing
 
 ```shell
-npm run test:fork
+npm run test:fork # run the test suite
 ```
 
 ## Deploying
 
 ```shell
-npx hardhat run scripts/deploy.ts --network arbitrum
+npx hardhat node # start local hardhat node
+npm run deploy:local # deploy the contract
 ```
+
