@@ -23,6 +23,8 @@ contract Echo {
     function createEcho(string memory _content, uint256 _x, uint256 _y) external returns (uint256) {
         require(bytes(_content).length > 0, "Echo content cannot be empty");
         require(bytes(_content).length <= 280, "Echo content too long");
+        require(_x <= 1000, "X coordinate must be between 0 and 1000");
+        require(_y <= 10000, "Y coordinate must be between 0 and 10000");
 
         uint256 echoId = totalEchoes;
         echoes[echoId] = EchoData({
