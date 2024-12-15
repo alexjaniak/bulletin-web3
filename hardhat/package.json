@@ -2,7 +2,7 @@
   "name": "hardhat-project",
   "scripts": {
     "test:fork": "REPORT_GAS=true npx hardhat test test/Echo.test.ts --network hardhat",
-    "deploy:local": "npx hardhat ignition deploy ignition/modules/deploy_echo.ts --network localhost"
+    "deploy:local": "npx hardhat ignition deploy ignition/modules/DeployEchoModule.ts --network localhost && npx hardhat test test/Echo.ignition.test.ts --network localhost"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
