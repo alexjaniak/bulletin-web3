@@ -17,9 +17,6 @@ const config: HardhatUserConfig = {
       chainId: 42161, // Arbitrum One chainId
     },
   },
-  mocha: {
-    grep: process.env.TEST_TAG ? `@${process.env.TEST_TAG}` : undefined,
-  },
   etherscan: {
     apiKey: process.env.ARBISCAN_API_KEY,
   },
