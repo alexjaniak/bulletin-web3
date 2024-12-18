@@ -1,31 +1,35 @@
 import AppRouter from './AppRouter';
+import { WagmiProvider } from 'wagmi'
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultConfig,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import { arbitrum } from 'wagmi/chains';
+import { http, createConfig } from 'wagmi'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-// Init firesbase/store
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+const queryClient = new QueryClient();
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API_KEY,
-  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_APP_ID
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-// Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
-
+const config = createConfig({
+  chains: [arbitrum],
+  transports: {
+    [arbitrum.id]: http(),
+  },
+})
 
 function App() {
   return (
-    <div>
-      <AppRouter db={db}/>
-    </div>
-  );
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider chains={[arbitrum]}>
+          <div>
+            <AppRouter/>
+          </div>
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  )
 }
 
 export default App;

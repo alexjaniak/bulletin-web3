@@ -7,11 +7,11 @@ import {
 
   //window.scrollTo(0, Math.floor(Math.random() * 10000))
   
-  function AppRouter({db}) {
+  function AppRouter() {
     return (
       <Router>
         <Routes>
-          <Route path="/" element={<Bulletin db={db}/>} />
+          <Route path="/" element={<Bulletin/>} />
         </Routes>
       </Router>
     );

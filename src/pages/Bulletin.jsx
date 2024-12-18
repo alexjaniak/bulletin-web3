@@ -1,9 +1,8 @@
 import Echo from '../components/Echo';
 import AddEchoModal from '../components/AddEchoModal';
+import CustomConnectButton from '../components/ConnectButton';
 import { useEffect, useState } from 'react';
-import { pushEcho } from '../db';
 import { v4 as uuidv4 } from 'uuid';
-import { collection, onSnapshot } from 'firebase/firestore';
 
 function Bulletin({ db }) {
   const [echoData, setEchoData] = useState([])
@@ -14,13 +13,11 @@ function Bulletin({ db }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const unsub = onSnapshot(collection(db, "echoes"), (querySnapshot) => {
-        let echoes = [];
-        querySnapshot.forEach((doc) => {
-          echoes.push(doc.data());
-        });
-        setEchoData(echoes);
+      let echoes = [];
+      querySnapshot.forEach((doc) => {
+        echoes.push(None);
       });
+      setEchoData(echoes);
     }
     fetchData();
   }, []);
@@ -65,7 +62,6 @@ function Bulletin({ db }) {
   const handleAddEcho = async (message) => {
     setEchoData([...echoData, { x: showAddModal.x, y: showAddModal.y, message }]);
     setShowAddModal({ show: false, x: 0, y: 0 });
-    await pushEcho(db, uuidv4(), showAddModal.x, showAddModal.y, message);
   };
 
   const handleAddEchoClose = () => {
@@ -75,6 +71,9 @@ function Bulletin({ db }) {
 
   return (
     <div className="relative h-screen disable-scroll cursor-pointer" onClick={handleBackgroundClick}>
+      <div className="fixed top-4 right-4 z-50" onClick={(e) => e.stopPropagation()}>
+        <CustomConnectButton />
+      </div>
       <div className="h-bulletin-height relative disable-scroll">
         <div className={`fixed top-0 left-0 text-xl text-black px-1 bg-white z-50 text-center cursor-default ${scrollY === 0 ? 'hidden' : ''}`} onClick={(e) => e.stopPropagation()}>
           {scrollY}
