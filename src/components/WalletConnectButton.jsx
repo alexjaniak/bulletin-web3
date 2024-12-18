@@ -1,6 +1,11 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const WalletConnectButton = () => {
+  const handleClick = (e, action) => {
+    e.stopPropagation();
+    action();
+  };
+
   return (
     <ConnectButton.Custom>
       {({
@@ -29,7 +34,7 @@ const WalletConnectButton = () => {
               if (!connected) {
                 return (
                   <button
-                    onClick={openConnectModal}
+                    onClick={(e) => handleClick(e, openConnectModal)}
                     className="bg-transparent text-white font-mono text-sm border border-white px-3 py-1 hover:bg-white hover:bg-opacity-10"
                   >
                     connect
@@ -39,7 +44,7 @@ const WalletConnectButton = () => {
 
               return (
                 <button
-                  onClick={openAccountModal}
+                  onClick={(e) => handleClick(e, openAccountModal)}
                   className="bg-transparent text-white font-mono text-sm border border-white px-3 py-1 hover:bg-white hover:bg-opacity-10"
                 >
                   {account.displayName}
