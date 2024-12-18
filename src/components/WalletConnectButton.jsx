@@ -1,6 +1,6 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-const CustomConnectButton = () => {
+const WalletConnectButton = () => {
   return (
     <ConnectButton 
       chainStatus="icon"
@@ -9,4 +9,4 @@ const CustomConnectButton = () => {
   );
 };
 
-export default CustomConnectButton; 
+export default WalletConnectButton; 

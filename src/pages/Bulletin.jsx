@@ -1,31 +1,21 @@
 import Echo from '../components/Echo';
 import AddEchoModal from '../components/AddEchoModal';
-import CustomConnectButton from '../components/ConnectButton';
+import WalletConnectButton from '../components/WalletConnectButton';
 import { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useEchoContract } from '../hooks/useEchoContract';
 
-function Bulletin({ db }) {
-  const [echoData, setEchoData] = useState([])
+function Bulletin() {
   const [showAddModal, setShowAddModal] = useState({ show: false, x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(window.scrollY);
   const [message, setMessage] = useState('');
 
-
-  useEffect(() => {
-    const fetchData = async () => {
-      let echoes = [];
-      querySnapshot.forEach((doc) => {
-        echoes.push(None);
-      });
-      setEchoData(echoes);
-    }
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    window.scrollTo(0, Math.floor(Math.random() * 10000))
-  }, [])
-
+  const {
+    echoes,
+    createNewEcho,
+    isEchoCreating,
+    readError,
+    writeError
+  } = useEchoContract();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +23,6 @@ function Bulletin({ db }) {
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -47,7 +36,6 @@ function Bulletin({ db }) {
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -60,27 +48,46 @@ function Bulletin({ db }) {
   };
 
   const handleAddEcho = async (message) => {
-    setEchoData([...echoData, { x: showAddModal.x, y: showAddModal.y, message }]);
+    try {
+      await createNewEcho(message, showAddModal.x, showAddModal.y);
+    } catch (error) {
+      console.error('Error creating echo:', error);
+    }
     setShowAddModal({ show: false, x: 0, y: 0 });
   };
 
   const handleAddEchoClose = () => {
     setShowAddModal(false);
+  };
 
-  }
+  // Display any contract errors
+  useEffect(() => {
+    if (readError) {
+      console.error('Error reading echoes:', readError);
+    }
+    if (writeError) {
+      console.error('Error writing echo:', writeError);
+    }
+  }, [readError, writeError]);
 
   return (
     <div className="relative h-screen disable-scroll cursor-pointer" onClick={handleBackgroundClick}>
       <div className="fixed top-4 right-4 z-50" onClick={(e) => e.stopPropagation()}>
-        <CustomConnectButton />
+        <WalletConnectButton />
       </div>
       <div className="h-bulletin-height relative disable-scroll">
         <div className={`fixed top-0 left-0 text-xl text-black px-1 bg-white z-50 text-center cursor-default ${scrollY === 0 ? 'hidden' : ''}`} onClick={(e) => e.stopPropagation()}>
           {scrollY}
         </div>
 
-        {echoData.map((button, index) => (
-          <Echo key={index} x={button.x} y={button.y} message={button.message} important={button.important}/>
+        {echoes.map((echo, index) => (
+          <Echo 
+            key={index} 
+            x={echo.x} 
+            y={echo.y} 
+            message={echo.message} 
+            important={echo.important}
+          />
         ))}
       </div>
       {showAddModal.show && (
@@ -89,6 +96,7 @@ function Bulletin({ db }) {
           onAddEcho={handleAddEcho}
           message={message}
           setMessage={setMessage}
+          isLoading={isEchoCreating}
         />
       )}
     </div>
