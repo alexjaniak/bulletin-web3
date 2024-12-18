@@ -5,9 +5,11 @@ Echo.propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
     message: PropTypes.string.isRequired,
+    creator: PropTypes.string.isRequired,
+    important: PropTypes.bool,
 }
 
-function Echo({ x, y, message, important }) {
+function Echo({ x, y, message, creator, important }) {
     const [showMessage, setShowMessage] = useState(false);
     const buttonRef = useRef(null);
 
@@ -50,6 +52,7 @@ function Echo({ x, y, message, important }) {
 
     const left = `calc(${x * 100}vw - 12px)`;
     const top = `calc(${y}px - 12px)`;
+
     return (
         <div className="relative">
             <button
@@ -59,7 +62,11 @@ function Echo({ x, y, message, important }) {
                 style={{ left, top }}
                 onClick={handleClick}
             >
-                {(important === "yes")? <div className="z-49 bg-green-500 w-2 h-2 transform transition-transform duration-300 ease-in-out group-hover:scale-150"></div> : <div className="bg-white w-2 h-2 transform transition-transform duration-300 ease-in-out group-hover:scale-150"></div>}
+                {(important === "yes")? 
+                    <div className="z-49 bg-green-500 w-2 h-2 transform transition-transform duration-300 ease-in-out group-hover:scale-150"></div> 
+                    : 
+                    <div className="bg-white w-2 h-2 transform transition-transform duration-300 ease-in-out group-hover:scale-150"></div>
+                }
             </button>
             {showMessage && (
                 <div
@@ -68,7 +75,8 @@ function Echo({ x, y, message, important }) {
                 >
                     <div className="text-black bg-white p-2 w-1/2 max-w-4xl max-h-[40%] overflow-auto">
                         <p className='text-center p-2'>@ x: {x.toFixed(2)} y: {y}</p>
-                        <hr className="mx-2"></hr>
+                        <p className='text-center text-sm text-gray-500'>by: {creator}</p>
+                        <hr className="mx-2 my-2"></hr>
                         <div className='p-2 flex flex-col break-words break whitespace-pre-wrap'>
                             <p>{message}</p>
                         </div>
@@ -77,7 +85,6 @@ function Echo({ x, y, message, important }) {
             )}
         </div>
     );
-
 }
 
 export default Echo;

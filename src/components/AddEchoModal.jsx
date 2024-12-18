@@ -18,7 +18,7 @@ function AddEchoModal({ onClose, onAddEcho, message, setMessage }) {
     }, []);
 
     const handlePost = () => {
-        if (message.trim().length > 5000) {
+        if (message.trim().length > 280) {
             setErrorMessage('Message is too long :(');
             return;
         }

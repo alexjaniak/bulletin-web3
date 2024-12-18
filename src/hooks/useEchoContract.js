@@ -38,6 +38,7 @@ export function useEchoContract() {
     x: Number(echo.position.x) / 1000, // Convert from 0-1000 to 0-1
     y: Number(echo.position.y),
     message: echo.content,
+    creator: echo.creator,
     important: false,
   })) || [];
 
