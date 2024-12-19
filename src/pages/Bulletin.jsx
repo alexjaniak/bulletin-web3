@@ -14,6 +14,7 @@ function Bulletin() {
     echoes,
     createNewEcho,
     isEchoCreating,
+    isLoadingEchoes,
     readError,
     writeError
   } = useEchoContract();
@@ -87,16 +88,25 @@ function Bulletin() {
     <div className="min-h-screen w-full cursor-pointer" onClick={handleBackgroundClick}>
       <Header coordinates={coordinates} />
       <div className="h-bulletin-height w-full relative">
-        {echoes.map((echo, index) => (
-          <Echo 
-            key={index} 
-            x={echo.x} 
-            y={echo.y} 
-            message={echo.message}
-            creator={echo.creator} 
-            important={echo.important}
-          />
-        ))}
+        {isLoadingEchoes ? (
+          <div className="fixed inset-0 flex items-center justify-center pointer-events-none">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-2 h-2 bg-white animate-pulse"></div>
+              <span className="text-white/50 font-mono text-sm">loading echoes...</span>
+            </div>
+          </div>
+        ) : (
+          echoes.map((echo, index) => (
+            <Echo 
+              key={index} 
+              x={echo.x} 
+              y={echo.y} 
+              message={echo.message}
+              creator={echo.creator} 
+              important={echo.important}
+            />
+          ))
+        )}
       </div>
       {showAddModal.show && (
         <AddEchoModal
