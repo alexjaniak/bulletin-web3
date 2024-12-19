@@ -50,7 +50,6 @@ function Bulletin() {
     };
   }, [updateCoordinates]);
 
-  // Update coordinates when mouse position changes
   useEffect(() => {
     updateCoordinates();
   }, [mousePosition, updateCoordinates]);
@@ -74,7 +73,6 @@ function Bulletin() {
     setShowAddModal(false);
   };
 
-  // Display any contract errors
   useEffect(() => {
     if (readError) {
       console.error('Error reading echoes:', readError);

@@ -10,14 +10,12 @@ const WalletConnectButton = () => {
     <ConnectButton.Custom>
       {({
         account,
-        chain,
         openAccountModal,
-        openChainModal,
         openConnectModal,
         mounted,
       }) => {
         const ready = mounted;
-        const connected = ready && account && chain;
+        const connected = ready && account;
 
         return (
           <div
@@ -29,6 +27,7 @@ const WalletConnectButton = () => {
                 userSelect: 'none',
               },
             })}
+            className="flex items-center gap-2"
           >
             {(() => {
               if (!connected) {
