@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-function AddEchoModal({ onClose, onAddEcho, message, setMessage }) {
+function AddEchoModal({ onClose, onAddEcho, message, setMessage, isLoading }) {
     const [errorMessage, setErrorMessage] = useState('');
     const textareaRef = useRef(null);
 
@@ -48,21 +48,22 @@ function AddEchoModal({ onClose, onAddEcho, message, setMessage }) {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onClick={handleClose}>
-            <div className="bg-white shadow-lg w-1/2 max-w-4xl h-1/4 flex flex-col justify-center items-center">
+            <div className="bg-white w-1/2 max-w-4xl flex flex-col">
                 <textarea
                     ref={textareaRef}
                     placeholder="Echo something to the internet..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className="p-2 w-full h-full bg-white text-black outline-none resize-none" // Add hover:bg-gray-200 class
+                    className="p-4 w-full h-32 bg-white text-black font-mono outline-none resize-none border-b text-base"
                 />
-                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                {errorMessage && <p className="text-red-500 text-sm font-mono px-4 py-2">{errorMessage}</p>}
                 <button
                     onClick={handlePost}
-                    className="bg-[#333] text-white px-4 py-2 w-full hover:bg-[#444] text-xl"
+                    disabled={isLoading}
+                    className="bg-gray-100 text-black font-mono text-base px-4 py-3 hover:bg-gray-200 text-center disabled:opacity-50 transition-colors"
                 >
-                    Post
+                    {isLoading ? 'Posting...' : 'Post'}
                 </button>
             </div>
         </div>
@@ -74,6 +75,7 @@ AddEchoModal.propTypes = {
     onAddEcho: PropTypes.func.isRequired,
     message: PropTypes.string.isRequired,
     setMessage: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool,
 };
 
 export default AddEchoModal;

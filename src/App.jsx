@@ -4,6 +4,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import {
   getDefaultConfig,
   RainbowKitProvider,
+  lightTheme,
 } from '@rainbow-me/rainbowkit';
 import { arbitrum } from 'wagmi/chains';
 import { http, createConfig } from 'wagmi'
@@ -22,8 +23,19 @@ function App() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider chains={[arbitrum]}>
-          <div>
+        <RainbowKitProvider 
+          chains={[arbitrum]}
+          theme={lightTheme({
+            accentColor: 'white',
+            accentColorForeground: '#242424',
+            borderRadius: 'none',
+            fontStack: 'mono',
+            overlayBlur: 'small',
+          })}
+          modalSize="compact"
+          showRecentTransactions={false}
+        >
+          <div> 
             <AppRouter/>
           </div>
         </RainbowKitProvider>

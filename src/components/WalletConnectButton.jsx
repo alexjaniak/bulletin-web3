@@ -37,7 +37,7 @@ const WalletConnectButton = () => {
                     onClick={(e) => handleClick(e, openConnectModal)}
                     className="bg-transparent text-white font-mono text-sm border border-white px-3 py-1 hover:bg-white hover:bg-opacity-10"
                   >
-                    connect
+                    Connect
                   </button>
                 );
               }
